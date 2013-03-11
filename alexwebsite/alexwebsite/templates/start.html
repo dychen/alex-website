@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enter a Username</title>
+</head>
+<body>
+    {% if errors %}
+        <ul>
+            <p style="color: red;"><b>Something was wrong with your input:</b></p>
+            {% for error in errors %}
+            <p style="color: red;">{{ error }}</p>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <p> Enter a username:: </p>
+    <form action="" method="get">
+        <input type="text" name="name">
+        <input type="submit" name="submit" value="Next">
+    </form>
+</body>
+</html>

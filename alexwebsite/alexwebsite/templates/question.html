@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question</title>
+</head>
+<body>
+    {% block content %}{% endblock %}
+    {% if errors %}
+        <ul>
+            <p style="color: red;"><b>Something was wrong with your input:</b></p>
+            {% for error in errors %}
+            <p style="color: red;">{{ error }}</p>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <p> Answer: </p>
+    <form action="" method="get">
+        <input type="text" name="answer">
+        <input type="submit" name="next" value="Next">
+    </form>
+</body>
+</html>
