@@ -57,7 +57,7 @@ def question(request):
                 answer = int(a)
                 correct = check_answer(question, answer)
                 time = (datetime.now() - request.session['start_time']).seconds
-                new = Response(name=name, question=question, answer=answer, time=time)
+                new = Response(name=name, question=question, answer=answer, correct=correct, time=time)
                 new.save()
                 request.session['start_time'] = datetime.now()
                 if next_form == 'done.html':
