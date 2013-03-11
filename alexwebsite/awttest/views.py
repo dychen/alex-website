@@ -55,6 +55,7 @@ def question(request):
                 request.session['question_number'] += 1
                 question = int(question_number)
                 answer = int(a)
+                correct = check_answer(question, answer)
                 time = (datetime.now() - request.session['start_time']).seconds
                 new = Response(name=name, question=question, answer=answer, time=time)
                 new.save()
@@ -65,3 +66,32 @@ def question(request):
     else:
         request.session['start_time'] = datetime.now()
         return render_to_response(curr_form)
+
+def check_answer(question_number, answer):
+    if question_number == 1:
+        if answer == -5:
+            return True
+    elif question_number == 2:
+        if answer == -3:
+            return True
+    elif question_number == 3:
+        if answer == 17:
+            return True
+    elif question_number == 4:
+        if answer == 16:
+            return True
+    elif question_number == 5:
+        if answer == 22:
+            return True
+    elif question_number == 6:
+        if answer == 16:
+            return True
+    elif question_number == 7:
+        if answer == 4:
+            return True
+    elif question_number == 8:
+        if answer == 29:
+            return True
+    else:
+        return False
+    return False
