@@ -146,3 +146,6 @@ LOGGING = {
         },
     }
 }
+
+if '.heroku' in os.environ['_']:
+    from production_settings import *
