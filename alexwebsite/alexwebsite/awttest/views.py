@@ -1,5 +1,6 @@
 import urllib2
 import json
+from datetime import *
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from alexwebsite.awttest.models import *
@@ -19,9 +20,12 @@ def login(request):
             return render_to_response('instructions1.html')
     return render_to_response('start.html')
 
+def done(request):
+    request.session['question_number'] = -1
+    return render_to_response('done.html')
+
 def question(request):
     question_number = request.session['question_number']
-    print question_number
     curr_form = 'question' + str(question_number) + '.html'
     if question_number == 5:
         next_form = 'instructions2.html'
@@ -29,10 +33,10 @@ def question(request):
         next_form = 'instructions3.html'
     elif question_number == 13:
         next_form = 'done.html'
+    elif question_number == -1:
+        return render_to_response('error_finished_quiz.html')
     else:
         next_form = 'question' + str(question_number + 1) + '.html'
-    print 'curr_form: ' + curr_form
-    print 'next_form: ' + next_form
     errors = []
     if 'answer' in request.GET:
         a = request.GET['answer']
@@ -51,9 +55,13 @@ def question(request):
                 request.session['question_number'] += 1
                 question = int(question_number)
                 answer = int(a)
-                new = Response(name=name, question=question, answer=answer)
+                time = (datetime.now() - request.session['start_time']).seconds
+                new = Response(name=name, question=question, answer=answer, time=time)
                 new.save()
-                question_number
+                request.session['start_time'] = datetime.now()
+                if next_form == 'done.html':
+                    done(request)
                 return render_to_response(next_form)
     else:
+        request.session['start_time'] = datetime.now()
         return render_to_response(curr_form)

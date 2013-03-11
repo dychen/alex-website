@@ -7,4 +7,5 @@ class Response(models.Model):
     question = models.PositiveIntegerField()
     answer = models.IntegerField()
     correct = models.NullBooleanField(null=True)
+    time = models.FloatField()
     
