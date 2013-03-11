@@ -1,1 +1,1 @@
-web: gunicorn alexwebsitealexwebsitealexwebsitealexwebsitealexwebsitealexwebsitealexwebsitealexwebsitealexwebsite.wsgi -b 0.0.0.0:$PORT
+web: gunicorn alexwebsite.wsgi -b 0.0.0.0:$PORT
