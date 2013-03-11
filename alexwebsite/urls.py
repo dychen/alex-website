@@ -20,4 +20,5 @@ urlpatterns = patterns('',
                        #url(r'^/$', login),
                        #url(r'^question$', question),
     url(r'^question/$', question),
+    url(r'^view_scores/$', view_scores),
 )

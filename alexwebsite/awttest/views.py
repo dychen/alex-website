@@ -55,7 +55,10 @@ def question(request):
                 request.session['question_number'] += 1
                 question = int(question_number)
                 answer = int(a)
-                correct = check_answer(question, answer)
+                if question <= 8:
+                    correct = check_answer(question, answer)
+                else:
+                    correct = None
                 time = (datetime.now() - request.session['start_time']).seconds
                 new = Response(name=name, question=question, answer=answer, correct=correct, time=time)
                 new.save()
@@ -66,6 +69,10 @@ def question(request):
     else:
         request.session['start_time'] = datetime.now()
         return render_to_response(curr_form)
+
+def view_scores(request):
+    responses = Response.objects.all()
+    return render_to_response('view_scores.html', {'responses': responses})
 
 def check_answer(question_number, answer):
     if question_number == 1:
