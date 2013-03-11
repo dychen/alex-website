@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scores</title>
+</head>
+<body>
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Username</th>
+        <th>Question Number</th>
+        <th>Answer</th>
+        <th>Whether Answer is Correct</th>
+        <th>Time Taken</th>
+    </tr>
+    {% for response in responses %}
+    <tr>
+        <td>{{ response.name }}</td>
+        <td>{{ response.question }}</td>
+        <td>{{ response.answer }}</td>
+        <td>{{ response.correct }}</td>
+        <td>{{ response.time }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
